@@ -1,0 +1,31 @@
+package com.disha.app.controller;
+
+import com.disha.app.model.Appointment;
+import com.disha.app.repository.AppointmentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping(value = "/doctor")
+public class DoctorController {
+
+    @Autowired
+    AppointmentRepository appointmentRepository;
+    @RequestMapping(value = "/appointment",method = RequestMethod.GET)
+    public List<Appointment> getAppointments(@RequestParam("doctorName") String doctorName)
+    {
+        return appointmentRepository.findBydoctorName(doctorName);
+    }
+
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    public Appointment saveAppointment(@RequestBody Appointment appointment)
+    {
+        appointment = appointmentRepository.save(appointment);
+        return appointment;
+    }
+
+}
