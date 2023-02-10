@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 public interface PrescriptionRepository  extends MongoRepository<Prescription,String> {
     public Prescription save(Prescription prescription);
-    public List<Prescription> findByPatientName(String patientName);
+    public List<Prescription> findByAllPatientName(String patientName);
+
+
 }
